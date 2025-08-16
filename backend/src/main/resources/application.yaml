@@ -1,0 +1,134 @@
+server:
+    servlet:
+        encoding:
+            charset: UTF-8
+    port: ${SERVER_PORT:8080}
+    compression:
+        enabled: true
+
+spring:
+    application:
+        name: PriziQ!
+    main:
+        lazy-initialization: true
+    jpa:
+        hibernate:
+            ddl-auto: update
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.PostgreSQLDialect
+        show-sql: false
+
+    datasource:
+        url: jdbc:postgresql://localhost:5432/preziq
+        username: postgres
+        password: 9897
+
+    data:
+        web:
+            pageable:
+                one-indexed-parameters: true
+        redis:
+            host: ${REDIS_HOST:localhost}
+            port: ${REDIS_PORT:6379}
+            username: ${REDIS_USERNAME:default}  # Username for Redis authentication, default to 'default'
+            password: ${REDIS_PASSWORD:}         # Password for Redis authentication
+            database: ${REDIS_DATABASE:0}
+            timeout: ${REDIS_TIMEOUT:2000}    # Timeout for Redis commands
+            lettuce:
+                shutdown-timeout: ${REDIS_SHUTDOWN_TIMEOUT:100}  # Timeout when closing a connection
+
+    servlet:
+        multipart:
+            max-file-size: 5MB
+            max-request-size: 25MB
+
+    # ✅ FIXED: mail configuration at the correct level under spring
+    mail:
+        host: ${MAIL_HOST:smtp.gmail.com}
+        port: ${MAIL_PORT:587}
+        username: ${MAIL_USERNAME:dummy@gmail.com}
+        password: ${MAIL_PASSWORD:dummy-password}
+        properties:
+            mail:
+                smtp:
+                    auth: true
+                    starttls:
+                        enable: true
+
+# ✅ FIXED: Move priziq configuration to root level (not under spring)
+priziq:
+    frontend:
+        base-url: ${FRONTEND_BASE_URL:http://localhost:5173}
+    account:
+        base-password: ${ACCOUNT_BASE_PASSWORD:base_pass}
+    allowed-init: ${ALLOWED_INIT:true}
+    submission:
+        base-score: ${SUBMISSION_BASE_SCORE:30}
+        time-decrement: ${SUBMISSION_TIME_DECREMENT:1}
+    quiz:
+        default:
+            question: ${QUIZ_DEFAULT_QUESTION:Default question}
+            time_limit_seconds: ${QUIZ_DEFAULT_TIME_LIMIT_SECONDS:30}
+            point_type: ${QUIZ_DEFAULT_POINT_TYPE:STANDARD}
+        location:
+            default_longitude: ${QUIZ_DEFAULT_LONGITUDE:0.0}
+            default_latitude: ${QUIZ_DEFAULT_LATITUDE:0.0}
+            default_radius: ${QUIZ_DEFAULT_RADIUS:100.0}
+        reorder:
+            step1: ${QUIZ_REORDER_STEP1:Step 1}
+            step2: ${QUIZ_REORDER_STEP2:Step 2}
+        choice:
+            option1: ${QUIZ_CHOICE_OPTION1:Option 1}
+            option2: ${QUIZ_CHOICE_OPTION2:Option 2}
+            option3: ${QUIZ_CHOICE_OPTION3:Option 3}
+            option4: ${QUIZ_CHOICE_OPTION4:Option 4}
+            wrong_answer: ${QUIZ_CHOICE_WRONG_ANSWER:Wrong answer}
+        type_answer:
+            default: ${QUIZ_TYPE_ANSWER_DEFAULT:Default answer}
+        true_false:
+            option_true: ${QUIZ_CHOICE_TRUE:True}
+            option_false: ${QUIZ_CHOICE_FALSE:False}
+        matching_pairs:
+            default_question: ${QUIZ_MATCHING_PAIRS_DEFAULT_QUESTION:Match each item correctly}
+            left_column: ${QUIZ_MATCHING_PAIRS_LEFT_COLUMN:Left Column}
+            right_column: ${QUIZ_MATCHING_PAIRS_RIGHT_COLUMN:Right Column}
+            item1: ${QUIZ_MATCHING_PAIRS_ITEM_1:Item 1}
+            match1: ${QUIZ_MATCHING_PAIRS_MATCH_1:Match 1}
+        default_activity:
+            title: ${QUIZ_DEFAULT_ACTIVITY_TITLE:Default Quiz}
+            description: ${QUIZ_DEFAULT_ACTIVITY_DESCRIPTION:A default multiple-choice quiz}
+            is_published: ${QUIZ_DEFAULT_ACTIVITY_IS_PUBLISHED:true}
+    slide:
+        default:
+            transition_duration: ${SLIDE_DEFAULT_TRANSITION_DURATION:1}
+            auto_advance_seconds: ${SLIDE_DEFAULT_AUTO_ADVANCE_SECONDS:0}
+
+# ✅ JWT configuration at the root level
+jwt:
+    access-signer-key: ${JWT_ACCESS_SIGNER_KEY:default-secret-key-for-development-only-change-in-production}
+    refresh-signer-key: ${JWT_REFRESH_SIGNER_KEY:default-refresh-key-for-development-only-change-in-production}
+    access-token-duration-in-seconds: ${JWT_ACCESS_TOKEN_DURATION:3600} # 1h
+    refresh-token-duration-in-seconds: ${JWT_REFRESH_TOKEN_DURATION:604800} # 7 days
+
+# ✅ AWS configuration at the root level
+aws:
+    credentials:
+        accessKey: ${AWS_ACCESS_KEY:dummy-access-key}
+        secretKey: ${AWS_SECRET_KEY:dummy-secret-key}
+    s3:
+        bucketName: ${AWS_BUCKET_NAME:dummy-bucket}
+        region: ${AWS_REGION:us-east-1}
+
+# ✅ File configuration at the root level
+file:
+    allowedTypes: ${FILE_ALLOWED_TYPES:image/jpeg,image/png,image/jpg,audio/mpeg}
+    maxSize: ${FILE_MAX_SIZE:5242880} # 5 MB
+    minSize: ${FILE_MIN_SIZE:1024} # 1 KB
+
+# ✅ Session configuration at root level
+session:
+    code:
+        characters: ${SESSION_CODE_CHARACTERS:ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789}
+        length: ${SESSION_CODE_LENGTH:6}
+        max-attempts: ${SESSION_CODE_MAX_ATTEMPTS:10}
