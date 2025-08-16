@@ -2,9 +2,13 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/.idea/PreziQ.iml" filepath="$PROJECT_DIR$/.idea/PreziQ.iml" />
       <module fileurl="file://$PROJECT_DIR$/preziq-backend/preziq-backend/src/main/main.iml" filepath="$PROJECT_DIR$/preziq-backend/preziq-backend/src/main/main.iml" />
       <module fileurl="file://$PROJECT_DIR$/preziq-backend/preziq-backend/src/test/test.iml" filepath="$PROJECT_DIR$/preziq-backend/preziq-backend/src/test/test.iml" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/.idea/PreziQ-backend.iml" filepath="$PROJECT_DIR$/.idea/PreziQ-backend.iml" />
+>>>>>>> 547935bc746c571e50a9ae83418b9606f53387ab
     </modules>
   </component>
 </project>

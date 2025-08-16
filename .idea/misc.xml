@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+<<<<<<< HEAD
+=======
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/PreziQ-backend-spring-boot-main/pom.xml" />
+      </list>
+    </option>
+  </component>
+>>>>>>> 547935bc746c571e50a9ae83418b9606f53387ab
   <component name="ProjectRootManager" version="2" languageLevel="JDK_22" default="true" project-jdk-name="23" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>

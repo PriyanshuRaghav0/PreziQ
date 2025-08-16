@@ -1,0 +1,48 @@
+﻿version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: priziq
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 9897
+    networks:
+      - preziq-network
+    ports:
+      - "5432:5432"
+
+  backend:
+    image: thuanflu/preziq-backend:latest
+    container_name: preziq-backend
+    env_file:
+      - .env
+    environment:
+      DB_URL: jdbc:postgresql://postgres:5432/priziq
+      DB_USERNAME: postgres
+      DB_PASSWORD: 9897
+    depends_on:
+      - postgres
+    networks:
+      - preziq-network
+    expose:
+      - 8080
+
+  nginx:
+    image: thuanflu/preziq-nginx:latest
+    container_name: preziq-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /etc/letsencrypt:/etc/letsencrypt:ro
+    depends_on:
+      - backend
+    networks:
+      - preziq-network
+
+networks:
+  preziq-network:
+    driver: bridge
